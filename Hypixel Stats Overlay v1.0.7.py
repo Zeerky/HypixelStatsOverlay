@@ -12,7 +12,7 @@ uuid = "4aa19464-3860-42eb-8af9-63ff4114d377"
 
 
 #PLACE YOUR API KEY INBETWEEN THE QUOTES IN THE NEXT LINE
-key = "14321ca6-b9b4-459f-98d0-52085b504d8a"
+key = "60dc9492-3ebc-4657-8cc4-dfe171018353"
 
 #HOW TO GET YOUR UUID AND API KEY
 #STEP 1: GOTO NAMEMC.COM AND LOOK UP YOUR IGN (OR WHOEVER'S STATS YOUR PULLING)
@@ -154,6 +154,12 @@ def statsCallDuels():
     print("4: Classic")
     print("5: Skywars")
     print("6: Sumo")
+    print("7: Bow")
+    print("8: BowSpleef")
+    #print("9: Nodebuff")
+    #print("10: Combo")
+    #print("11: Blitz")
+    #print("12: MegaWalls")
 
     userChoice = input()
 
@@ -258,7 +264,46 @@ def statsCallDuels():
         except KeyError:
             sumoLosses = 0
         my_label.config(text="Sumo Wins: " + str(sumoWins) + "\nSumo Losses: " + str(sumoLosses))
-        root.after(30000,statsCallOP)
+        root.after(30000,statsCallSumo)
+
+    #BOW DUELS
+
+    elif userChoice == "bow" or userChoice == "Bow" or userChoice == "7":
+        data = requests.get(url).json()
+        try:
+            if int(data["player"]["stats"]["Duels"]["bow_duel_wins"]) > 0:
+                bowWins = data["player"]["stats"]["Duels"]["bow_duel_wins"]
+        except KeyError:
+            bowWins = 0
+        try:    
+            if int(data["player"]["stats"]["Duels"]["bow_duel_losses"]) > 0:
+                bowLosses = data["player"]["stats"]["Duels"]["bow_duel_losses"]
+        except KeyError:
+            bowLosses = 0
+        my_label.config(text="Bow Wins: " + str(bowWins) + "\nBow Losses: " + str(bowLosses))
+        root.after(30000,statsCallBow)     
+
+    #BowSpleef
+
+    elif userChoice == "bowspleef" or userChoice == "BowSpleef" or userChoice == "8" or userChoice == "Bowspleef":
+        data = requests.get(url).json()
+        try:
+            if int(data["player"]["stats"]["Duels"]["bowspleef_duel_wins"]) > 0:
+                bowSpleefWins = data["player"]["stats"]["Duels"]["bowspleef_duel_wins"]
+        except KeyError:
+            bowSpleefWins = 0
+        try:    
+            if int(data["player"]["stats"]["Duels"]["bowspleef_duel_losses"]) > 0:
+                bowSpleefLosses = data["player"]["stats"]["Duels"]["bowspleef_duel_losses"]
+        except KeyError:
+            bowSpleefLosses = 0
+        my_label.config(text="BowSpleef Wins: " + str(bowSpleefWins) + "\nBowSpleef Losses: " + str(bowSpleefLosses))
+        root.after(30000,statsCallBowSpleef) 
+
+#    print("9: Nodebuff")
+#    print("10: Combo")
+#    print("11: Blitz")
+#    print("12: MegaWalls")
 
     else:
         print("\n" * 27)
@@ -340,12 +385,35 @@ def statsCallSW():
     my_label.config(text="SW Wins: " + str(swWins) + "\nSW Losses: " + str(swLosses))
     root.after(30000,statsCallSW)
 
-def backButton():
-    root.destroy()
-    print("\n" * 27)
-    statsCallMain()
+def statsCallBow():
+    data = requests.get(url).json()
+    try:
+        if int(data["player"]["stats"]["Duels"]["bow_duel_wins"]) > 0:
+            bowWins = data["player"]["stats"]["Duels"]["bow_duel_wins"]
+    except KeyError:
+        bowWins = 0
+    try:    
+        if int(data["player"]["stats"]["Duels"]["bow_duel_losses"]) > 0:
+            bowLosses = data["player"]["stats"]["Duels"]["bow_duel_losses"]
+    except KeyError:
+        bowLosses = 0
+    my_label.config(text="Bow Wins: " + str(bowWins) + "\nBow Losses: " + str(bowLosses))
+    root.after(30000,statsCallBow) 
 
-
+def statsCallBowSpleef():
+    data = requests.get(url).json()
+    try:
+        if int(data["player"]["stats"]["Duels"]["bowspleef_duel_wins"]) > 0:
+            bowSpleefWins = data["player"]["stats"]["Duels"]["bowspleef_duel_wins"]
+    except KeyError:
+        bowSpleefWins = 0
+    try:    
+        if int(data["player"]["stats"]["Duels"]["bowspleef_duel_losses"]) > 0:
+            bowSpleefLosses = data["player"]["stats"]["Duels"]["bowspleef_duel_losses"]
+    except KeyError:
+        bowSpleefLosses = 0
+    my_label.config(text="BowSpleef Wins: " + str(bowSpleefWins) + "\nBowSpleef Losses: " + str(bowSpleefLosses))
+    root.after(30000,statsCallBowSpleef) 
 
 #MAIN WINDOW
 root = Tk()
