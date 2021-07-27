@@ -1,32 +1,23 @@
 Welcome to a a functioning but not really nice looking stats overlay that I made
-I have no idea how github works so if I messed anything up dm me on discord Zeerk#7777
 
-First thing you need to do is install the latest version of python3
+INSTALLATION INSTRUCTIONS:
+Step 1: Goto https://www.python.org/downloads/ and download the latest version of Python
+Step 2: During the installing MAKE SURE to check off this box https://imgur.com/a/Cf8EB0z
+Step 3: Click the green button at the top right of this screen and click "Download ZIP"
+Step 4: Extract the zip file to a folder and run the .bat file (this will install the requests module for python)
+Step 5: Right click the .py file and open with a text editor like notepad
+Step 6: You will see instructions at the top where to put your UUID and API Key and how to get them
+Step 7: After making the necessary changes, save and close the file and double click it, this should open the overlay
 
-**IMPORTANT**
-AT THE END OF THE PYTHON INSTALLATION MAKE SURE TO CHECK OFF THE BOX THAT SAYS "ADD PYTHON TO PATH"
-https://imgur.com/a/Cf8EB0z
+TROUBLESHOOTING:
+The "Hypixel Stats Overlay.py" file is not opening and is showing a white page for an icon
+	Reinstall Python, restart your computer and try again
 
+My stats are only displaying 0's
+	Make sure you correctly set up your API key and UUID
+	
+Running the programmed resulted in my house catching fire and and I grew and extra arm
+	Go do some research on ZeerkyClicker.com I think it might be able to help
 
-https://www.python.org/downloads/
-
-
-
-You also need 2 modules that I use in python for this,
-Requests (to grab the info from the hypixel api) 
-Tkinter(the gui that the overlay is running on)
-
-I made it stupid easy to install, you can either run '[RUN FIRST] install modules.bat'
-Or if you want to do it yourself:
-	-open a command prompt
-	-type pip install requests
-	-when its finished type pip install python-tk
-
-After this you are going to need to get your api key and uuid and paste it at the
-top of the code.
-
-To do this, right click the python file (Hypixel Stats Overlay vX.X.X.py) and open with notepad
-You will see instructions how to get your api key and uuid and where to put them at the top
-
-If you have any questions, suggestions, or wanna give me a hand making this look nice :3
+I'm still really new to this sort of thing, I suck at programming and have never posted on github before. I would love to hear feedback and if you know how to make it look a little nicer let me know lmao :3
 discord.gg/Bu86veVgjT
