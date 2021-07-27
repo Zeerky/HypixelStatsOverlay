@@ -28,8 +28,5 @@ top of the code.
 To do this, right click the python file (Hypixel Stats Overlay vX.X.X.py) and open with notepad
 You will see instructions how to get your api key and uuid and where to put them at the top
 
-							
-
-								Thanks again,
 If you have any questions, suggestions, or wanna give me a hand making this look nice :3
-							discord.gg/Bu86veVgjT
+discord.gg/Bu86veVgjT
