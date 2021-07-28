@@ -20,13 +20,13 @@ Step 7: After making the necessary changes, save and close the file and double c
 
 
 TROUBLESHOOTING:
-The "Hypixel Stats Overlay.py" file is not opening and is showing a white page for an icon
+The "Hypixel Stats Overlay.py" file is not opening and is showing a white page for an icon: 
 	Reinstall Python, restart your computer and try again
 
-My stats are only displaying 0's
+My stats are only displaying 0's: 
 	Make sure you correctly set up your API key and UUID
 	
-Running the programmed resulted in my house catching fire and and I grew and extra arm
+Running the programmed resulted in my house catching fire and and I grew and extra arm: 
 	Go do some research on ZeerkyClicker.com I think it might be able to help
 
 
