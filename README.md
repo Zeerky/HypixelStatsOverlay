@@ -5,6 +5,8 @@ Working with: Bedwars, Skywars, and all Duels
 
 INSTALLATION INSTRUCTIONS:
 
+https://youtu.be/ofJMRicDtrY
+
 Step 1: Goto https://www.python.org/downloads/ and download the latest version of Python
 
 Step 2: During the installing MAKE SURE to check off this box https://imgur.com/a/Cf8EB0z
