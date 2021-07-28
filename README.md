@@ -1,5 +1,7 @@
 Welcome to a a functioning but not really nice looking stats overlay that I made
 
+Working with: Bedwars, Skywars, and all Duels
+
 
 INSTALLATION INSTRUCTIONS:
 
