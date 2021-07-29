@@ -8,11 +8,11 @@
 
 
 #PLACE YOUR UUID (WITH DASHES) INBETWEEN THE QUOTES IN THE NEXT LINE
-uuid = "462baa14-fc68-46d6-a87b-4dc1fa070f21"
+uuid = "4aa19464-3860-42eb-8af9-63ff4114d377"
 
 
 #PLACE YOUR API KEY INBETWEEN THE QUOTES IN THE NEXT LINE
-key = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+key = "1f084667-b888-44cb-a23b-63ef4c89b88a"
 
 #HOW TO GET YOUR UUID AND API KEY
 #STEP 1: GOTO NAMEMC.COM AND LOOK UP YOUR IGN (OR WHOEVER'S STATS YOUR PULLING)
@@ -101,8 +101,7 @@ def statsCallMain():
 
     # Invalid choice
     else:
-        print(f"""{"\n" * 27}
-        Please try again""")
+        print("\n"*27,"Please try again")
         statsCallMain()
 
 # Duels stats
@@ -140,7 +139,7 @@ def statsCallDuels():
 
     #SKYWARS DUELS
     elif userChoice == "skywars" or userChoice == "Skywars" or userChoice == "5" or userChoice == "sw" or userChoice == "SW":
-        statsCallSkywars
+        statsCallSkywars()
 
     #SUMO DUELS
     elif userChoice == "sumo" or userChoice == "Sumo" or userChoice == "6":
@@ -188,10 +187,10 @@ def statsCallBedwars():
 def statsCallSkywars():
     data = requests.get(url).json()
 
-    skywars_wins = int(data['player']['stats']['Skywars'].get('wins', 0))
-    skywars_losses = int(data['player']['stats']['Skywars'].get('losses', 0))
-    skywars_kills = int(data['player']['stats']['Skywars'].get('kills', 0))
-    skywars_deaths = int(data['player']['stats']['Skywars'].get('deaths', 0))
+    skywars_wins = int(data['player']['stats']['SkyWars'].get('wins', 0))
+    skywars_losses = int(data['player']['stats']['SkyWars'].get('losses', 0))
+    skywars_kills = int(data['player']['stats']['SkyWars'].get('kills', 0))
+    skywars_deaths = int(data['player']['stats']['SkyWars'].get('deaths', 0))
 
     my_label.config(text=f"Skywars Wins: {skywars_wins}\nSkywars Losses: {skywars_losses}\nSkywars Kills: {skywars_kills}\nSkywars Deaths: {skywars_deaths}")
     root.after(5000, statsCallSkywars)
