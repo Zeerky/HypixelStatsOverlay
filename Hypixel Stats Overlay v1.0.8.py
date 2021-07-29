@@ -3,16 +3,16 @@
 #YOU NEED TO EITHER RUN THE modules.bat FILE OR DO THE FOLLOWING
 #OPEN COMMAND PROMPT AND TYPE
 #pip install requests
-#pip install 
+#pip install
 
 
 
 #PLACE YOUR UUID (WITH DASHES) INBETWEEN THE QUOTES IN THE NEXT LINE
-uuid = "4aa19464-3860-42eb-8af9-63ff4114d377" 
+uuid = "462baa14-fc68-46d6-a87b-4dc1fa070f21"
 
 
 #PLACE YOUR API KEY INBETWEEN THE QUOTES IN THE NEXT LINE
-key = "60dc9492-3ebc-4657-8cc4-dfe171018353"
+key = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
 #HOW TO GET YOUR UUID AND API KEY
 #STEP 1: GOTO NAMEMC.COM AND LOOK UP YOUR IGN (OR WHOEVER'S STATS YOUR PULLING)
@@ -62,92 +62,72 @@ print("\n" * 27)
 #
 #lunarWindow = gw.getWindowsWithTitle('Lunar')[0]
 def warnUser():
-    print("\n" * 27)
-    print("                    **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**")
-    print("            **CLOSING THIS WINDOW CLOSES THE OVERLAY**            **CLOSING THIS WINDOW CLOSES THE OVERLAY**")
-    print("\n" * 5)
-    print("                  ******************************                      ******************************")
-    print("                **YOU CAN MOVE THE WINDOW AROUND**                  **YOU CAN MOVE THE WINDOW AROUND**")
-    print("             **BY CLICKING AND DRAGGING ON THE TEXT**             **BY CLICKING AND DRAGGING ON THE TEXT**")
-    print("              **LOOK IN THE CODE TO CHANGE TEXT SIZE**            **LOOK IN THE CODE TO CHANGE TEXT SIZE**")
-    print("                **********************************                  **********************************")
-    print("\n" * 5)
-    print("                    **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**")
-    print("           **CLOSING THIS WINDOW CLOSES THE OVERLAY**             **CLOSING THIS WINDOW CLOSES THE OVERLAY**")
-    print("\n" * 5)
+    print(f"""{"\n" * 27}
+                        **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**
+                **CLOSING THIS WINDOW CLOSES THE OVERLAY**            **CLOSING THIS WINDOW CLOSES THE OVERLAY**
+    {"\n" * 5}
+                      ******************************                      ******************************
+                    **YOU CAN MOVE THE WINDOW AROUND**                  **YOU CAN MOVE THE WINDOW AROUND**
+                 **BY CLICKING AND DRAGGING ON THE TEXT**             **BY CLICKING AND DRAGGING ON THE TEXT**
+                  **LOOK IN THE CODE TO CHANGE TEXT SIZE**            **LOOK IN THE CODE TO CHANGE TEXT SIZE**
+                    **********************************                  **********************************
+    {"\n" * 5}
+                        **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**
+               **CLOSING THIS WINDOW CLOSES THE OVERLAY**             **CLOSING THIS WINDOW CLOSES THE OVERLAY**
+    {"\n" * 5}""")
 
 def statsCallMain():
-    print("1: Duels")
-    print("2: Bedwars")
-    print("3: Skywars")
-    userGame = input()
+    print("""1: Duels
+    2: Bedwars
+    3: Skywars
+    """)
+    user_game = input().lower()
 
-    if userGame == "duels" or userGame == "Duels" or userGame == "1":
-        print("\n" * 27)
+    # Duels selection
+    if (user_game in ["duels", '1']):
+        warnUser()
         statsCallDuels()
-    elif userGame == "bedwars" or userGame == "Bedwars" or userGame == "2" or userGame == "bw" or userGame == "BW":
+
+    # Bedwars selection
+    elif (user_game in ["bedwars", "bw", '2']):
         warnUser()
         statsCallBedwars()
-    elif userGame == "skywars" or userGame == "Skywars" or userGame == "3" or userGame == "sw" or userGame == "SW":
+
+    # Skywars selection
+    elif (user_game in ["skywars", "sw", '3']):
         warnUser()
-        statsCallSkywars()    
+        statsCallSkywars()
+
+    # Invalid choice
     else:
-        print("\n" * 27)
-        print('Please try again')
+        print(f"""{"\n" * 27}
+        Please try again""")
         statsCallMain()
 
-    #BEDWARS
-
+# Bedwars stats
 def statsCallBedwars():
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Bedwars"]["wins_bedwars"]) > 0:
-            bedwarsWins = data["player"]["stats"]["Bedwars"]["wins_bedwars"]
-    except KeyError:
-        bedwarsWins = 0
-    try:    
-        if int(data["player"]["stats"]["Bedwars"]["losses_bedwars"]) > 0:
-            bedwarsLosses = data["player"]["stats"]["Bedwars"]["losses_bedwars"]
-    except KeyError:
-        bedwarsLosses = 0
-    try:    
-        if int(data["player"]["stats"]["Bedwars"]["final_kills_bedwars"]) > 0:
-            bedwarsFinals = data["player"]["stats"]["Bedwars"]["final_kills_bedwars"]
-    except KeyError:
-        bedwarsFinals = 0
-    my_label.config(text="Bedwars Wins: " + str(bedwarsWins) + "\nBedwars Losses: " + str(bedwarsLosses) + "\n Bedwars Finals: " + str(bedwarsFinals))
-    root.after(5000,statsCallBedwars)
 
-    #SKYWARS
+    bedwars_wins = int(data.get('player', {}).get('stats', {}).get('Bedwars', {}).get('wins_bedwars', 0))
+    bedwars_losses = int(data.get('player', {}).get('stats', {}).get('Bedwars', {}).get('losses_bedwars', 0))
+    bedwars_finals = int(data.get('player', {}).get('stats', {}).get('Bedwars', {}).get('final_kills_bedwars', 0))
 
+    my_label.config(text=f"Bedwars Wins: {bedwars_wins}\nBedwars Losses: {bedwars_losses}\nBedwars Finals: {bedwars_finals}")
+    root.after(5000, statsCallBedwars)
+
+# Skywars stats
 def statsCallSkywars():
     data = requests.get(url).json()
-    print(data["player"]["stats"]["SkyWars"]["wins"])
-    try:
-        if int(data["player"]["stats"]["SkyWars"]["wins"]) > 0:
-            skywarsWins = data["player"]["stats"]["SkyWars"]["wins"]
-    except KeyError:
-        skywarsWins = 0
-    try:    
-        if int(data["player"]["stats"]["SkyWars"]["losses"]) > 0:
-            skywarsLosses = data["player"]["stats"]["SkyWars"]["losses"]
-    except KeyError:
-        skywarsLosses = 0
-    try:    
-        if int(data["player"]["stats"]["SkyWars"]["kills"]) > 0:
-            skywarsKills = data["player"]["stats"]["SkyWars"]["kills"]
-    except KeyError:
-        skywarsKills = 0
-    try:    
-        if int(data["player"]["stats"]["SkyWars"]["deaths"]) > 0:
-            skywarsDeaths = data["player"]["stats"]["SkyWars"]["deaths"]
-    except KeyError:
-        skywarsDeaths = 0
-    my_label.config(text="Skywars Wins: " + str(skywarsWins) + "\nSkywars Losses: " + str(skywarsLosses) + "\n Skywars Kills: " + str(skywarsKills) + "\nSkywars Deaths: " + str(skywarsDeaths))
-    root.after(5000,statsCallSkywars)
 
+    skywars_wins = int(data.get('player', {}).get('stats', {}).get('Skywars', {}).get('wins', 0))
+    skywars_losses = int(data.get('player', {}).get('stats', {}).get('Skywars', {}).get('losses', 0))
+    skywars_kills = int(data.get('player', {}).get('stats', {}).get('Skywars', {}).get('kills', 0))
+    skywars_deaths = int(data.get('player', {}).get('stats', {}).get('Skywars', {}).get('deaths', 0))
 
+    my_label.config(text=f"Skywars Wins: {skywars_wins}\nSkywars Losses: {skywars_losses}\nSkywars Kills: {skywars_kills}\nSkywars Deaths: {skywars_deaths}")
+    root.after(5000, statsCallSkywars)
 
+# Duels stats
 def statsCallDuels():
     print("1: Bridge")
     print("2: UHC")
@@ -183,7 +163,7 @@ def statsCallDuels():
     #SKYWARS DUELS
     elif userChoice == "skywars" or userChoice == "Skywars" or userChoice == "5" or userChoice == "sw" or userChoice == "SW":
         statsCallSkywars
-    
+
     #SUMO DUELS
     elif userChoice == "sumo" or userChoice == "Sumo" or userChoice == "6":
         statsCallSumo()
@@ -202,12 +182,12 @@ def statsCallDuels():
 
     #COMBO DUELS
     elif userChoice == "combo" or userChoice == "Combo" or userChoice == "10":
-        statsCallCombo()  
+        statsCallCombo()
 
     #BLITZ DUELS
     elif userChoice == "blitz" or userChoice == "Blitz" or userChoice == "11":
         statsCallBlitz()
-    
+
     #MEGAWALLS DUELS
     elif userChoice == "megawalls" or userChoice == "Megawalls" or userChoice == "12" or userChoice == "MegaWalls":
         statsCallMegawalls()
@@ -226,7 +206,7 @@ def statsCallBridge():
             bridgeWins = data["player"]["stats"]["Duels"]["bridge_duel_wins"]
     except KeyError:
         bridgeWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["bridge_duel_losses"]) > 0:
             bridgeLosses = data["player"]["stats"]["Duels"]["bridge_duel_losses"]
     except KeyError:
@@ -243,7 +223,7 @@ def statsCallUHC():
             uhcWins = data["player"]["stats"]["Duels"]["uhc_duel_wins"]
     except KeyError:
         uhcWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["uhc_duel_losses"]) > 0:
             uhcLosses = data["player"]["stats"]["Duels"]["uhc_duel_losses"]
     except KeyError:
@@ -259,7 +239,7 @@ def statsCallOP():
             opWins = data["player"]["stats"]["Duels"]["op_duel_wins"]
     except KeyError:
         opWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["op_duel_losses"]) > 0:
             opLosses = data["player"]["stats"]["Duels"]["op_duel_losses"]
     except KeyError:
@@ -275,7 +255,7 @@ def statsCallClassic():
             classicWins = data["player"]["stats"]["Duels"]["classic_duel_wins"]
     except KeyError:
         classicWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["classic_duel_losses"]) > 0:
             classicLosses = data["player"]["stats"]["Duels"]["classic_duel_losses"]
     except KeyError:
@@ -291,7 +271,7 @@ def statsCallSW():
             swWins = data["player"]["stats"]["Duels"]["sw_duel_wins"]
     except KeyError:
         swWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["sw_duel_losses"]) > 0:
             swLosses = data["player"]["stats"]["Duels"]["sw_duel_losses"]
     except KeyError:
@@ -308,7 +288,7 @@ def statsCallSumo():
             sumoWins = data["player"]["stats"]["Duels"]["sumo_duel_wins"]
     except KeyError:
         sumoWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["sumo_duel_losses"]) > 0:
             sumoLosses = data["player"]["stats"]["Duels"]["sumo_duel_losses"]
     except KeyError:
@@ -326,14 +306,14 @@ def statsCallBow():
             bowWins = data["player"]["stats"]["Duels"]["bow_duel_wins"]
     except KeyError:
         bowWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["bow_duel_losses"]) > 0:
             bowLosses = data["player"]["stats"]["Duels"]["bow_duel_losses"]
     except KeyError:
         bowLosses = 0
     warnUser()
     my_label.config(text="Bow Wins: " + str(bowWins) + "\nBow Losses: " + str(bowLosses))
-    root.after(5000,statsCallBow) 
+    root.after(5000,statsCallBow)
 
 def statsCallBowSpleef():
     data = requests.get(url).json()
@@ -342,14 +322,14 @@ def statsCallBowSpleef():
             bowSpleefWins = data["player"]["stats"]["Duels"]["bowspleef_duel_wins"]
     except KeyError:
         bowSpleefWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["bowspleef_duel_losses"]) > 0:
             bowSpleefLosses = data["player"]["stats"]["Duels"]["bowspleef_duel_losses"]
     except KeyError:
         bowSpleefLosses = 0
     warnUser()
     my_label.config(text="BowSpleef Wins: " + str(bowSpleefWins) + "\nBowSpleef Losses: " + str(bowSpleefLosses))
-    root.after(5000,statsCallBowSpleef) 
+    root.after(5000,statsCallBowSpleef)
 
 def statsCallNodebuff():
     data = requests.get(url).json()
@@ -358,14 +338,14 @@ def statsCallNodebuff():
             nodebuffWins = data["player"]["stats"]["Duels"]["no_debuff_duel_wins"]
     except KeyError:
         nodebuffWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["no_debuff_duel_losses"]) > 0:
             nodebuffLosses = data["player"]["stats"]["Duels"]["no_debuff_duel_losses"]
     except KeyError:
         nodebuffLosses = 0
     warnUser()
     my_label.config(text="Nodebuff Wins: " + str(nodebuffWins) + "\nNodebuff Losses: " + str(nodebuffLosses))
-    root.after(5000,statsCallNodebuff) 
+    root.after(5000,statsCallNodebuff)
 
 def statsCallCombo():
     data = requests.get(url).json()
@@ -374,14 +354,14 @@ def statsCallCombo():
             comboWins = data["player"]["stats"]["Duels"]["combo_duel_wins"]
     except KeyError:
         comboWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["combo_duel_losses"]) > 0:
             comboLosses = data["player"]["stats"]["Duels"]["combo_duel_losses"]
     except KeyError:
         comboLosses = 0
     warnUser()
     my_label.config(text="Combo Wins: " + str(comboWins) + "\nCombo Losses: " + str(comboLosses))
-    root.after(5000,statsCallCombo)   
+    root.after(5000,statsCallCombo)
 
 def statsCallBlitz():
     data = requests.get(url).json()
@@ -390,7 +370,7 @@ def statsCallBlitz():
             blitzWins = data["player"]["stats"]["Duels"]["blitz_duel_wins"]
     except KeyError:
         blitzWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["blitz_duel_losses"]) > 0:
             blitzLosses = data["player"]["stats"]["Duels"]["blitz_duel_losses"]
     except KeyError:
@@ -406,7 +386,7 @@ def statsCallMegawalls():
             megawallsWins = data["player"]["stats"]["Duels"]["mega_walls_duel_wins"]
     except KeyError:
         megawallsWins = 0
-    try:    
+    try:
         if int(data["player"]["stats"]["Duels"]["mega_walls_duel_losses"]) > 0:
             megawallsLosses = data["player"]["stats"]["Duels"]["mega_walls_duel_losses"]
     except KeyError:
