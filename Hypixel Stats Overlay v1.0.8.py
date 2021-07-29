@@ -62,19 +62,20 @@ print("\n" * 27)
 #
 #lunarWindow = gw.getWindowsWithTitle('Lunar')[0]
 def warnUser():
-    print("\n" * 27)
-    print("                    **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**")
-    print("            **CLOSING THIS WINDOW CLOSES THE OVERLAY**            **CLOSING THIS WINDOW CLOSES THE OVERLAY**")
-    print("\n" * 5)
-    print("                  ******************************                      ******************************")
-    print("                **YOU CAN MOVE THE WINDOW AROUND**                  **YOU CAN MOVE THE WINDOW AROUND**")
-    print("             **BY CLICKING AND DRAGGING ON THE TEXT**             **BY CLICKING AND DRAGGING ON THE TEXT**")
-    print("              **LOOK IN THE CODE TO CHANGE TEXT SIZE**            **LOOK IN THE CODE TO CHANGE TEXT SIZE**")
-    print("                **********************************                  **********************************")
-    print("\n" * 5)
-    print("                    **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**")
-    print("           **CLOSING THIS WINDOW CLOSES THE OVERLAY**             **CLOSING THIS WINDOW CLOSES THE OVERLAY**")
-    print("\n" * 5)
+
+    print("\n"*27,"""
+                        **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**
+                **CLOSING THIS WINDOW CLOSES THE OVERLAY**            **CLOSING THIS WINDOW CLOSES THE OVERLAY**""",
+    "\n" * 5,
+        """           ******************************                      ******************************
+                    **YOU CAN MOVE THE WINDOW AROUND**                  **YOU CAN MOVE THE WINDOW AROUND**
+                 **BY CLICKING AND DRAGGING ON THE TEXT**             **BY CLICKING AND DRAGGING ON THE TEXT**
+                  **LOOK IN THE CODE TO CHANGE TEXT SIZE**            **LOOK IN THE CODE TO CHANGE TEXT SIZE**
+                    **********************************                  **********************************""",
+    "\n" * 5,
+        """             **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**
+               **CLOSING THIS WINDOW CLOSES THE OVERLAY**             **CLOSING THIS WINDOW CLOSES THE OVERLAY**""",
+    "\n" * 5)
 
 def statsCallMain():
     print("""1: Duels
@@ -100,32 +101,9 @@ def statsCallMain():
 
     # Invalid choice
     else:
-        print("\n" * 27)
-        print('Please try again')
+        print(f"""{"\n" * 27}
+        Please try again""")
         statsCallMain()
-
-# Bedwars stats
-def statsCallBedwars():
-    data = requests.get(url).json()
-
-    bedwars_wins = int(data.get('player', {}).get('stats', {}).get('Bedwars', {}).get('wins_bedwars', 0))
-    bedwars_losses = int(data.get('player', {}).get('stats', {}).get('Bedwars', {}).get('losses_bedwars', 0))
-    bedwars_finals = int(data.get('player', {}).get('stats', {}).get('Bedwars', {}).get('final_kills_bedwars', 0))
-
-    my_label.config(text=f"Bedwars Wins: {bedwars_wins}\nBedwars Losses: {bedwars_losses}\nBedwars Finals: {bedwars_finals}")
-    root.after(5000, statsCallBedwars)
-
-# Skywars stats
-def statsCallSkywars():
-    data = requests.get(url).json()
-
-    skywars_wins = int(data.get('player', {}).get('stats', {}).get('Skywars', {}).get('wins', 0))
-    skywars_losses = int(data.get('player', {}).get('stats', {}).get('Skywars', {}).get('losses', 0))
-    skywars_kills = int(data.get('player', {}).get('stats', {}).get('Skywars', {}).get('kills', 0))
-    skywars_deaths = int(data.get('player', {}).get('stats', {}).get('Skywars', {}).get('deaths', 0))
-
-    my_label.config(text=f"Skywars Wins: {skywars_wins}\nSkywars Losses: {skywars_losses}\nSkywars Kills: {skywars_kills}\nSkywars Deaths: {skywars_deaths}")
-    root.after(5000, statsCallSkywars)
 
 # Duels stats
 def statsCallDuels():
@@ -197,20 +175,32 @@ def statsCallDuels():
         print("Please make sure you spelt the game correctly!")
         statsCallMain()
 
+def statsCallBedwars():
+    data = requests.get(url).json()
+
+    bedwars_wins = int(data['player']['stats']['Bedwars'].get('wins_bedwars', 0))
+    bedwars_losses = int(data['player']['stats']['Bedwars'].get('losses_bedwars', 0))
+    bedwars_finals = int(data['player']['stats']['Bedwars'].get('final_kills_bedwars', 0))
+
+    my_label.config(text=f"Bedwars Wins: {bedwars_wins}\nBedwars Losses: {bedwars_losses}\nBedwars Finals: {bedwars_finals}")
+    root.after(5000, statsCallBedwars)
+
+def statsCallSkywars():
+    data = requests.get(url).json()
+
+    skywars_wins = int(data['player']['stats']['Skywars'].get('wins', 0))
+    skywars_losses = int(data['player']['stats']['Skywars'].get('losses', 0))
+    skywars_kills = int(data['player']['stats']['Skywars'].get('kills', 0))
+    skywars_deaths = int(data['player']['stats']['Skywars'].get('deaths', 0))
+
+    my_label.config(text=f"Skywars Wins: {skywars_wins}\nSkywars Losses: {skywars_losses}\nSkywars Kills: {skywars_kills}\nSkywars Deaths: {skywars_deaths}")
+    root.after(5000, statsCallSkywars)
 
 def statsCallBridge():
     root.lift()
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Duels"]["bridge_duel_wins"]) > 0:
-            bridgeWins = data["player"]["stats"]["Duels"]["bridge_duel_wins"]
-    except KeyError:
-        bridgeWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["bridge_duel_losses"]) > 0:
-            bridgeLosses = data["player"]["stats"]["Duels"]["bridge_duel_losses"]
-    except KeyError:
-        bridgeLosses = 0
+    bridgeWins = data["player"]["stats"]["Duels"].get("bridge_duel_wins", 0)
+    bridgeLosses = data["player"]["stats"]["Duels"].get("bridge_duel_losses", 0)
     warnUser()
     root.wm_attributes("-topmost", 1)
     my_label.config(text="Bridge Wins: " + str(bridgeWins) + "\nBridge Losses: " + str(bridgeLosses))
@@ -218,64 +208,32 @@ def statsCallBridge():
 
 def statsCallUHC():
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Duels"]["uhc_duel_wins"]) > 0:
-            uhcWins = data["player"]["stats"]["Duels"]["uhc_duel_wins"]
-    except KeyError:
-        uhcWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["uhc_duel_losses"]) > 0:
-            uhcLosses = data["player"]["stats"]["Duels"]["uhc_duel_losses"]
-    except KeyError:
-        uhcLosses = 0
+    uhcWins = data["player"]["stats"]["Duels"].get("uhc_duel_wins", 0)
+    uhcLosses = data["player"]["stats"]["Duels"].get("uhc_duel_losses", 0)
     warnUser()
     my_label.config(text="UHC Wins: " + str(uhcWins) + "\nUHC Losses: " + str(uhcLosses))
     root.after(5000,statsCallUHC)
 
 def statsCallOP():
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Duels"]["op_duel_wins"]) > 0:
-            opWins = data["player"]["stats"]["Duels"]["op_duel_wins"]
-    except KeyError:
-        opWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["op_duel_losses"]) > 0:
-            opLosses = data["player"]["stats"]["Duels"]["op_duel_losses"]
-    except KeyError:
-        opLosses = 0
+    opWins = data["player"]["stats"]["Duels"].get("op_duel_wins", 0)
+    opLosses = data["player"]["stats"]["Duels"].get("op_duel_losses", 0)
     warnUser()
     my_label.config(text="OP Wins: " + str(opWins) + "\nOP Losses: " + str(opLosses))
     root.after(5000,statsCallOP)
 
 def statsCallClassic():
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Duels"]["classic_duel_wins"]) > 0:
-            classicWins = data["player"]["stats"]["Duels"]["classic_duel_wins"]
-    except KeyError:
-        classicWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["classic_duel_losses"]) > 0:
-            classicLosses = data["player"]["stats"]["Duels"]["classic_duel_losses"]
-    except KeyError:
-        classicLosses = 0
+    classicWins = data["player"]["stats"]["Duels"].get("classic_duel_wins", 0)
+    classicLosses = data["player"]["stats"]["Duels"].get("classic_duel_losses", 0)
     warnUser()
     my_label.config(text="Classic Wins: " + str(classicWins) + "\nClassic Losses: " + str(classicLosses))
     root.after(5000,statsCallClassic)
 
 def statsCallSW():
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Duels"]["sw_duel_wins"]) > 0:
-            swWins = data["player"]["stats"]["Duels"]["sw_duel_wins"]
-    except KeyError:
-        swWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["sw_duel_losses"]) > 0:
-            swLosses = data["player"]["stats"]["Duels"]["sw_duel_losses"]
-    except KeyError:
-        swLosses = 0
+    swWins = data["player"]["stats"]["Duels"].get("sw_duel_wins", 0)
+    swLosses = data["player"]["stats"]["Duels"].get("sw_duel_losses", 0)
     warnUser()
     my_label.config(text="SW Wins: " + str(swWins) + "\nSW Losses: " + str(swLosses))
     root.after(5000,statsCallSW)
@@ -283,16 +241,8 @@ def statsCallSW():
 def statsCallSumo():
     data = requests.get(url).json()
     #Tries to get Sumo wins/losses if there aren't any set to 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["sumo_duel_wins"]) > 0:
-            sumoWins = data["player"]["stats"]["Duels"]["sumo_duel_wins"]
-    except KeyError:
-        sumoWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["sumo_duel_losses"]) > 0:
-            sumoLosses = data["player"]["stats"]["Duels"]["sumo_duel_losses"]
-    except KeyError:
-        sumoLosses = 0
+    sumoWins = data["player"]["stats"]["Duels"].get("sumo_duel_wins", 0)
+    sumoLosses = data["player"]["stats"]["Duels"].get("sumo_duel_losses", 0)
     warnUser()
     #Changes the text on the overlay
     my_label.config(text="Sumo Wins: " + str(sumoWins) + "\nSumo Losses: " + str(sumoLosses))
@@ -301,96 +251,48 @@ def statsCallSumo():
 
 def statsCallBow():
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Duels"]["bow_duel_wins"]) > 0:
-            bowWins = data["player"]["stats"]["Duels"]["bow_duel_wins"]
-    except KeyError:
-        bowWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["bow_duel_losses"]) > 0:
-            bowLosses = data["player"]["stats"]["Duels"]["bow_duel_losses"]
-    except KeyError:
-        bowLosses = 0
+    bowWins = data["player"]["stats"]["Duels"].get("bow_duel_wins", 0)
+    bowLosses = data["player"]["stats"]["Duels"].get("bow_duel_losses", 0)
     warnUser()
     my_label.config(text="Bow Wins: " + str(bowWins) + "\nBow Losses: " + str(bowLosses))
     root.after(5000,statsCallBow)
 
 def statsCallBowSpleef():
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Duels"]["bowspleef_duel_wins"]) > 0:
-            bowSpleefWins = data["player"]["stats"]["Duels"]["bowspleef_duel_wins"]
-    except KeyError:
-        bowSpleefWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["bowspleef_duel_losses"]) > 0:
-            bowSpleefLosses = data["player"]["stats"]["Duels"]["bowspleef_duel_losses"]
-    except KeyError:
-        bowSpleefLosses = 0
+    bowSpleefWins = data["player"]["stats"]["Duels"].get("bowspleef_duel_wins", 0)
+    bowSpleefLosses = data["player"]["stats"]["Duels"].get("bowspleef_duel_losses", 0)
     warnUser()
     my_label.config(text="BowSpleef Wins: " + str(bowSpleefWins) + "\nBowSpleef Losses: " + str(bowSpleefLosses))
     root.after(5000,statsCallBowSpleef)
 
 def statsCallNodebuff():
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Duels"]["no_debuff_duel_wins"]) > 0:
-            nodebuffWins = data["player"]["stats"]["Duels"]["no_debuff_duel_wins"]
-    except KeyError:
-        nodebuffWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["no_debuff_duel_losses"]) > 0:
-            nodebuffLosses = data["player"]["stats"]["Duels"]["no_debuff_duel_losses"]
-    except KeyError:
-        nodebuffLosses = 0
+    nodebuffWins = data["player"]["stats"]["Duels"].get("no_debuff_duel_wins", 0)
+    nodebuffLosses = data["player"]["stats"]["Duels"].get("no_debuff_duel_losses", 0)
     warnUser()
     my_label.config(text="Nodebuff Wins: " + str(nodebuffWins) + "\nNodebuff Losses: " + str(nodebuffLosses))
     root.after(5000,statsCallNodebuff)
 
 def statsCallCombo():
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Duels"]["combo_duel_wins"]) > 0:
-            comboWins = data["player"]["stats"]["Duels"]["combo_duel_wins"]
-    except KeyError:
-        comboWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["combo_duel_losses"]) > 0:
-            comboLosses = data["player"]["stats"]["Duels"]["combo_duel_losses"]
-    except KeyError:
-        comboLosses = 0
+    comboWins = data["player"]["stats"]["Duels"].get("combo_duel_wins", 0)
+    comboLosses = data["player"]["stats"]["Duels"].get("combo_duel_losses", 0)
     warnUser()
     my_label.config(text="Combo Wins: " + str(comboWins) + "\nCombo Losses: " + str(comboLosses))
     root.after(5000,statsCallCombo)
 
 def statsCallBlitz():
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Duels"]["blitz_duel_wins"]) > 0:
-            blitzWins = data["player"]["stats"]["Duels"]["blitz_duel_wins"]
-    except KeyError:
-        blitzWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["blitz_duel_losses"]) > 0:
-            blitzLosses = data["player"]["stats"]["Duels"]["blitz_duel_losses"]
-    except KeyError:
-        blitzLosses = 0
+    blitzWins = data["player"]["stats"]["Duels"].get("blitz_duel_wins", 0)
+    blitzLosses = data["player"]["stats"]["Duels"].get("blitz_duel_losses", 0)
     warnUser()
     my_label.config(text="Blitz Wins: " + str(blitzWins) + "\nBlitz Losses: " + str(blitzLosses))
     root.after(5000,statsCallBlitz)
 
 def statsCallMegawalls():
     data = requests.get(url).json()
-    try:
-        if int(data["player"]["stats"]["Duels"]["mega_walls_duel_wins"]) > 0:
-            megawallsWins = data["player"]["stats"]["Duels"]["mega_walls_duel_wins"]
-    except KeyError:
-        megawallsWins = 0
-    try:
-        if int(data["player"]["stats"]["Duels"]["mega_walls_duel_losses"]) > 0:
-            megawallsLosses = data["player"]["stats"]["Duels"]["mega_walls_duel_losses"]
-    except KeyError:
-        megawallsLosses = 0
+    megawallsWins = data["player"]["stats"]["Duels"].get("mega_walls_duel_wins", 0)
+    megawallsLosses = data["player"]["stats"]["Duels"].get("mega_walls_duel_losses", 0)
     warnUser()
     my_label.config(text="Megawalls Wins: " + str(megawallsWins) + "\nMegawalls Losses: " + str(megawallsLosses))
     root.after(5000,statsCallMegawalls)
