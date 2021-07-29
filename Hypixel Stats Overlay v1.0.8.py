@@ -62,19 +62,19 @@ print("\n" * 27)
 #
 #lunarWindow = gw.getWindowsWithTitle('Lunar')[0]
 def warnUser():
-    print(f"""{"\n" * 27}
-                        **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**
-                **CLOSING THIS WINDOW CLOSES THE OVERLAY**            **CLOSING THIS WINDOW CLOSES THE OVERLAY**
-    {"\n" * 5}
-                      ******************************                      ******************************
-                    **YOU CAN MOVE THE WINDOW AROUND**                  **YOU CAN MOVE THE WINDOW AROUND**
-                 **BY CLICKING AND DRAGGING ON THE TEXT**             **BY CLICKING AND DRAGGING ON THE TEXT**
-                  **LOOK IN THE CODE TO CHANGE TEXT SIZE**            **LOOK IN THE CODE TO CHANGE TEXT SIZE**
-                    **********************************                  **********************************
-    {"\n" * 5}
-                        **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**
-               **CLOSING THIS WINDOW CLOSES THE OVERLAY**             **CLOSING THIS WINDOW CLOSES THE OVERLAY**
-    {"\n" * 5}""")
+    print("\n" * 27)
+    print("                    **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**")
+    print("            **CLOSING THIS WINDOW CLOSES THE OVERLAY**            **CLOSING THIS WINDOW CLOSES THE OVERLAY**")
+    print("\n" * 5)
+    print("                  ******************************                      ******************************")
+    print("                **YOU CAN MOVE THE WINDOW AROUND**                  **YOU CAN MOVE THE WINDOW AROUND**")
+    print("             **BY CLICKING AND DRAGGING ON THE TEXT**             **BY CLICKING AND DRAGGING ON THE TEXT**")
+    print("              **LOOK IN THE CODE TO CHANGE TEXT SIZE**            **LOOK IN THE CODE TO CHANGE TEXT SIZE**")
+    print("                **********************************                  **********************************")
+    print("\n" * 5)
+    print("                    **KEEP THIS WINDOW OPEN**                             **KEEP THIS WINDOW OPEN**")
+    print("           **CLOSING THIS WINDOW CLOSES THE OVERLAY**             **CLOSING THIS WINDOW CLOSES THE OVERLAY**")
+    print("\n" * 5)
 
 def statsCallMain():
     print("""1: Duels
@@ -100,8 +100,8 @@ def statsCallMain():
 
     # Invalid choice
     else:
-        print(f"""{"\n" * 27}
-        Please try again""")
+        print("\n" * 27)
+        print('Please try again')
         statsCallMain()
 
 # Bedwars stats
