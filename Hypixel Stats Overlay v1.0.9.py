@@ -12,7 +12,7 @@ uuid = "4aa19464-3860-42eb-8af9-63ff4114d377"
 
 
 #PLACE YOUR API KEY INBETWEEN THE QUOTES IN THE NEXT LINE
-key = "1f084667-b888-44cb-a23b-63ef4c89b88a"
+key = "bcb85286-9b00-4eab-bb9d-b9d9caec2b2e"
 
 #HOW TO GET YOUR UUID AND API KEY
 #STEP 1: GOTO NAMEMC.COM AND LOOK UP YOUR IGN (OR WHOEVER'S STATS YOUR PULLING)
@@ -21,13 +21,18 @@ key = "1f084667-b888-44cb-a23b-63ef4c89b88a"
 #STEP 4: COPY THE KEY IT GIVES YOU AND PASTE IT IN THE 6TH LINE
 
 #IF YOU WANT TO CHANGE THE SIZE OF THE TEXT MESS AROUND WITH THIS NUMBER
-textSize = int(40.2)
+textSize = int(40)
 
 #YOU CNA CHANGE THE COlOR OF THE TEXT BY EITHER PUTTING A HEX VALUE OR JUST TYPING "red"
 textColor = "#09d2f6"
 
+#THIS IS THE FONT BUT I HAVE NO IDEA WHAT OTHER KINDS OF FONTS THERE ARE LOL
+textFont = "gothic"
+
 #DO NOT CHANGE ANYTHING UNDER THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING
 #IF YOU HAVE ANY QUESTIONS/SUGGESTIONS COME JOIN AT discord.gg/Bu86veVgjT
+
+
 
 
 
@@ -41,7 +46,7 @@ import time
 
 
 
-windowWidth = textSize * 12
+windowWidth = textSize * 14
 windowHeight = textSize * 8
 
 
@@ -322,7 +327,7 @@ my_frame = Frame(root, width=windowWidth, height=windowHeight)
 my_frame.pack(pady=20, ipady=20, ipadx=20)
 
 #label that draws text
-my_label = Label(my_frame, font=("Rockwell", textSize), fg=textColor)
+my_label = Label(my_frame, font=(textFont, textSize, "bold"), fg=textColor)
 my_label.pack(pady=20)
 
 #hypixel api url
