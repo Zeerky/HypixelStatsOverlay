@@ -25,7 +25,7 @@ key = "xxx"
 textSize = int(35)
 
 #DELAY TO UPDATE THE STATS ON THE OVERLAY (dont put this too low)
-refreshTime = 5000 #will refresh overlay every 2 seconds. if its laggy, try turning this to 5000
+refreshTime = 2000 #will refresh overlay every 2 seconds. if its laggy, try turning this to 5000
 
 #YOU CAN CHANGE THE COlOR OF THE TEXT BY EITHER PUTTING A HEX VALUE OR JUST TYPING "red"
 textColor = "#09d2f6"
