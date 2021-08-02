@@ -33,7 +33,7 @@ textColor = "#09d2f6"
 #FONT SETTINGS
 import pyglet
 pyglet.font.add_file('Minecraft.ttf')
-textFont = "Minecraft"
+textFont = "MinecraftCHMC"
 
 #    ------------------------------------------------------------------------
 #   |DO NOT CHANGE ANYTHING UNDER THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING |
