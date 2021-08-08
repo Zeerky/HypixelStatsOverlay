@@ -39,4 +39,4 @@ Simple video: https://youtu.be/ofJMRicDtrY
 
 ## Some context
 I'm still really new to this sort of thing, I suck at programming and have never posted on github before. I would love to hear feedback and if you know how to make it look a little nicer let me know lmao :3
-discord.gg/Bu86veVgjT
+https://discord.gg/Bu86veVgjT
