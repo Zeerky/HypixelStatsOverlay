@@ -1,11 +1,12 @@
 # Hypixel Statistics Overlay
 
-This is a functioning but not really nice looking stats overlay that I made
+This is a functioning stats overlay that I made for Hypixel that I'm still trying to figure out how to improve.
 
 Working with: Bedwars, Skywars, and all Duels
 
 
 ## INSTALLATION INSTRUCTIONS
+Simple video: https://youtu.be/ofJMRicDtrY
 
 ### Windows
  - Goto https://www.python.org/downloads/ and download the latest version of Python
@@ -14,7 +15,7 @@ Working with: Bedwars, Skywars, and all Duels
 
  - Click the green button at the top right of this screen and click "Download ZIP"
 
- - Extract the zip file to a folder and run the .bat file (this will install the requests module for python)
+ - Extract the zip file to a folder and run the .bat file (this will install the requests and pyglet(font) modules for python)
 
  - Right click the .py file and open with a text editor like notepad
 
@@ -22,7 +23,6 @@ Working with: Bedwars, Skywars, and all Duels
 
  - After making the necessary changes, save and close the file and double click it, this should open the overlay
 
-Simple video: https://youtu.be/ofJMRicDtrY
 
 
 
