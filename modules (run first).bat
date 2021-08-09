@@ -1,3 +1,2 @@
-pip install requests
-pip install pyglet
+pip install requests pyglet
 pause
