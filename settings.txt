@@ -1,0 +1,13 @@
+username
+api key
+25
+2000
+#3FD8F0
+
+-------------FORMAT-------------
+
+USERNAME
+API KEY (/api on hypixel)
+FONT SIZE
+REFRESH RATE
+COLOR OF TEXT (in hex) --- https://htmlcolorcodes.com/color-picker/
