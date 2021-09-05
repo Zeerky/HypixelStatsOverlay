@@ -1,36 +1,20 @@
-#REALLY IMPORTANT PLEASE READ
-#FIRST YOU MUST INSTALL THE LATEST VERSION OF PYTHON FROM python.org
-#YOU NEED TO EITHER RUN THE modules.bat FILE *OR* DO THE FOLLOWING
-#OPEN COMMAND PROMPT AND TYPE
-#pip install requests
-#pip install pyglet
-#YOU ONLY NEED TO DO THIS ONCE
+#You're in the wrong spot :D edit settings.txt to continue
 
+import requests
 
+settings = open("settings.txt", "r").read().split("\n")
 
+uuidResponse = requests.get("https://api.mojang.com/users/profiles/minecraft/" + settings[0])
+uuid = uuidResponse.json()["id"]
 
-#HOW TO GET YOUR UUID AND API KEY
-#STEP 1: GOTO NAMEMC.COM AND LOOK UP YOUR IGN (OR WHOEVER'S STATS YOUR PULLING)
-#STEP 2: COPY YOUR UUID (WITH THE DASHES) AND PASTE IT IN THE 2ND LINE
-#STEP 3: LOG ONTO HYPIXEL.NET AND TYPE /api new IN THE CHAT
-#STEP 4: COPY THE KEY IT GIVES YOU AND PASTE IT IN THE 6TH LINE
+key = settings[1]
 
-#PLACE YOUR UUID (WITH DASHES) INBETWEEN THE QUOTES IN THE NEXT LINE
-uuid = "xxx"
+textSize = int(settings[2])
 
-#PLACE YOUR API KEY INBETWEEN THE QUOTES IN THE NEXT LINE
-key = "xxx"
+refreshTime = settings[3]
 
-#IF YOU WANT TO CHANGE THE SIZE OF THE TEXT MESS AROUND WITH THIS NUMBER
-textSize = int(35)
+textColor = settings[4]
 
-#DELAY TO UPDATE THE STATS ON THE OVERLAY (dont put this too low)
-refreshTime = 2000 #will refresh overlay every 2 seconds. if its laggy, try turning this to 5000
-
-#YOU CAN CHANGE THE COlOR OF THE TEXT BY EITHER PUTTING A HEX VALUE OR JUST TYPING "red"
-textColor = "#09d2f6"
-
-#FONT SETTINGS
 import pyglet
 pyglet.font.add_file('Minecraft.ttf')
 textFont = "MinecraftCHMC"
@@ -41,7 +25,6 @@ textFont = "MinecraftCHMC"
 #    ------------------------------------------------------------------------
 
 from tkinter import *
-import requests
 import json
 from pprint import pprint
 import time
