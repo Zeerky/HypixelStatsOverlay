@@ -2,6 +2,8 @@
 
 This is a functioning stats overlay that I made for Hypixel that I'm still trying to figure out how to improve.
 
+Edit by Umi#1241
+
 Working with: Bedwars, Skywars, and all Duels
 
 
@@ -17,13 +19,10 @@ Simple video: https://youtu.be/ofJMRicDtrY
 
  - Extract the zip file to a folder and run the .bat file (this will install the requests and pyglet(font) modules for python)
 
- - Right click the .py file and open with a text editor like notepad
+ - Edit settings.txt to fill in required info
 
- - You will see instructions at the top where to put your UUID and API Key and how to get them
-
- - After making the necessary changes, save and close the file and double click it, this should open the overlay
-
-
+## RUN IN FULLSCREEN
+ - to run in fullscreen use borderless fullscreen, one way to do this is using https://github.com/Mr-Technician/BorderlessMinecraft/releases/tag/v1.2.3
 
 
 ## TROUBLESHOOTING
