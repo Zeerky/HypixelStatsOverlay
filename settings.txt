@@ -1,0 +1,13 @@
+umwi
+77a6dfc6-609e-484b-bbc1-e5480e8083b6
+25
+2000
+#3FD8F0
+
+-------------FORMAT-------------
+
+USERNAME
+API KEY (/api on hypixel)
+FONT SIZE
+REFRESH RATE
+COLOR OF TEXT (in hex) --- https://htmlcolorcodes.com/color-picker/
