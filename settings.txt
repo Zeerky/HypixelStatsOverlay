@@ -1,5 +1,5 @@
-umwi
-77a6dfc6-609e-484b-bbc1-e5480e8083b6
+username
+api key
 25
 2000
 #3FD8F0
